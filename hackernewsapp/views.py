@@ -325,4 +325,14 @@ def search(request):
             post.count_votes()
             post.count_comments() 
 
+        page= request.GET.get('page')
+        paginator = Paginator(posts, 3)
+
+        try:
+            posts = paginator.page(page)
+        except PageNotAnInteger:
+            posts = paginator.page(1)
+        except EmptyPage:
+            posts = paginator.page(paginator.num_pages)
+        return render(request,'search.html',{'posts':posts,'query':query})    
     return render(request,'search.html',{'posts':posts,'query':query})
