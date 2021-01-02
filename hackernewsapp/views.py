@@ -88,7 +88,6 @@ def UpVoteView(request,id):
             upvote.save()
             return redirect(request.META.get('HTTP_REFERER'))
         else:
-            
             return redirect(request.META.get('HTTP_REFERER'))
     return redirect('/signin')
 
@@ -97,13 +96,11 @@ def DownVoteView(request,id):
         post = Post.objects.get(id=id)
         votes = Vote.objects.filter(post = post)
         v = votes.filter(voter = request.user)
-        if len(v) == 0:
-            upvote = Vote(voter=request.user,post=post)
-            upvote.save()
-            return redirect(request.META.get('HTTP_REFERER'))
-        else:
+        if len(v) == 1:
             v.delete()
+            print("delete")
             return redirect(request.META.get('HTTP_REFERER'))
+        
     return redirect('/signin')   
 
 

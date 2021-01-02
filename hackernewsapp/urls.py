@@ -14,7 +14,7 @@ urlpatterns = [
     path('signup',signup, name='signup'),
     path('signout',signout, name='signout'),
     path('vote/<int:id>',UpVoteView,name='vote'),
-    
+    path('dvote/<int:id>',DownVoteView,name='dvote'),
     path('post/<int:id1>/comment/<int:id2>',CommentReplyView,name='reply'),
     path('edit/<int:id>',EditListView, name='edit')
 ]
