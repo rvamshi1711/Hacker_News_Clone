@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+
+<div class="w3-panel w3-light-grey w3-leftbar w3-border-grey">
+<p><strong>User: </strong>{{user.username}}</p>
+<p><strong>Created: </strong>{{user.date_joined}}</p>
+</div>
+
+<a href="{% url 'user_post' user.username %}">Submissions</a>
+
+{% endblock %}

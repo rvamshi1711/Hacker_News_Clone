@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+<div class="w3-panel w3-light-grey w3-leftbar w3-border-grey">
+<form method ='post'>
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-25">
+          <label for="title">Headline</label>
+        </div>
+        <div class="col-75">
+          <input type="text" id="title" name="title" placeholder="Your Headline..">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-25">
+          <label for="url">URL</label>
+        </div>
+        <div class="col-75">
+          <input type="text" id="url" name="url" placeholder="Paste your URL here..">
+        </div>
+    </div>
+    <div class="row">
+        {{form.media}}
+        {{form.as_p}}
+    </div>
+    
+    <input type="submit" value = "Submit">
+</form>
+</div>
+{% endblock %}

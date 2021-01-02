@@ -1,0 +1,49 @@
+{% extends 'base.html'%}
+{%block content%}
+
+<div>
+    <h2>Search results:</h2>
+    {%if posts|length < 1%}
+    <p>No search results</p>
+    Your search query: <b>{{query}}</b> did not match any posts. <br>
+    Suggestions: <br>
+    Try different keywords.
+
+    {%else%}
+
+    <div class="w3-panel w3-light-grey w3-leftbar w3-border-grey">
+        <ul>
+    {% for post in posts %}
+    
+    <li><p><a href = "{% url 'post' post.id%}"><strong>{{post.title}}</strong></a> - <a href = "{% url 'vote' post.id %}">{%if post.votes == 1%}<button class="upvote" type="submit">{{post.votes}} vote</button>{%else%}<button class="upvote" type="submit">{{post.votes}} votes</button>{%endif%}</a></p>
+    
+    {% if post.creator == request.user%}
+        <p>{{post.votes}} votes | Created {{post.created_on}}| <a href = "{% url 'user_info' post.creator.username %}">{{post.creator.username}}</a> | <a href="{% url 'post' post.id %}"> {{post.comments}} Comments</a> | <a href="{% url 'edit' post.id %}"> Edit</a></p></li>
+    {%else %}
+        <p>{{post.votes}} votes | Created {{post.created_on}}| <a href = "{% url 'user_info' post.creator.username %}">{{post.creator.username}}</a> | <a href="{% url 'post' post.id %}"> {{post.comments}} Comments</a></p></li>
+    {%endif%}
+    <div>
+        {{post.description|safe}}
+    </div>
+    
+    {% endfor %}
+    </ul>
+    </div>
+    <div class="center">
+        <div class="pagination">
+            <a href="http://127.0.0.1:8000/search/?query={{query}}&page=1">&laquo;</a>
+            {% for number in posts.paginator.page_range %}
+            <a href="http://127.0.0.1:8000/search/?query={{query}}&page={{number}}">{{number}}</a>
+            {%endfor%}
+            <a href="http://127.0.0.1:8000/search/?query={{query}}&page={{posts.paginator.num_pages}}">&raquo;</a>
+            
+        </div>
+    </div>
+
+    {%endif%}
+
+</div>
+
+
+
+{%endblock%}

@@ -1,0 +1,20 @@
+{% extends 'base1.html' %}
+{% load socialaccount %}
+{% providers_media_js %}
+{% block content %}
+
+
+
+<form method ='post'>
+    {% csrf_token %}
+    {{form.as_p}}
+    <input style="cursor: pointer;" type="submit" value = "Submit">
+</form>
+<br>
+<h3>Dont have an account??</h3>
+<a href = "{% url 'signup' %}">SignUp Here</a>
+<div>You can also signup with <a href="{% provider_login_url 'google' %}"><button class="google" type= "submit">Google</button></a></div>
+{%for m in messages%}
+<h3 style="color: red;">{{m}}</h3>
+{%endfor%}
+{% endblock %}

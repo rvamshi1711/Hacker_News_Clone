@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+<form method ='post' style="padding-bottom: 30px;">
+    {% csrf_token %}
+    <!--
+    <div class="row">
+        <div class="col-25">
+          <label for="username">Username: </label>
+        </div>
+        <div class="col-75">
+          <input type="text" id="username" name="username" placeholder="Your Username...">
+          <ul>
+              <li>Required 150 characters or fewer.</li>
+              <li>Letters, digits and @/./+/-/_ only.</li>
+          </ul>
+        </div>
+        
+    </div>
+    <div class="row">
+        <div class="col-25">
+          <label for="password">Password:</label>
+        </div>
+        <div class="col-75">
+          <input type="password" id="password" name="password" placeholder="Enter a Password">
+            <ul>
+                <li>Your password can’t be too similar to your other personal information.</li>
+                <li>Your password must contain at least 8 characters.</li>
+                <li>Your password can’t be a commonly used password.</li>
+                <li>Your password can’t be entirely numeric.</li>
+            </ul>
+        </div>
+        <div>
+               
+        </div>
+        
+    </div>
+    <div class="row" style="padding-bottom: 30px;">
+        <div class="col-25">
+          <label for="password1">Password confirmation:</label>
+        </div>
+        <div class="col-75">
+          <input type="password" id="password1" name="password1" placeholder="Enter the same password as before, for verification.">
+        </div>
+    </div>
+    -->
+    <div>
+      {{form.as_p}}
+    <input type="submit" value = "Submit">
+    </div>
+    
+</form>
+<br>
+
+<h3>Already Have an Account??</h3>
+<a href = "{% url 'signin' %}">Sign In Here</a>
+{%for m in messages%}
+<h3 style="color: red;">{{m}}</h3>
+{%endfor%}
+{% endblock %}
