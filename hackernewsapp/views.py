@@ -98,9 +98,9 @@ def DownVoteView(request,id):
         v = votes.filter(voter = request.user)
         if len(v) == 1:
             v.delete()
-            print("delete")
             return redirect(request.META.get('HTTP_REFERER'))
-        
+        else:
+            return redirect(request.META.get('HTTP_REFERER'))
     return redirect('/signin')   
 
 
